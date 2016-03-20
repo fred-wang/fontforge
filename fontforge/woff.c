@@ -32,6 +32,9 @@
 #include "fontforge.h"
 #include <math.h>
 #include <ctype.h>
+// FIXME: These are C++ headers!!!!
+//#include "woff2/src/woff2_dec.h"
+//#include "woff2/src/woff2_enc.h"
 
 #ifdef _NO_LIBPNG
 
@@ -229,6 +232,7 @@ SplineFont *_SFReadWOFF(FILE *woff,int flags,enum openflags openflags, char *fil
         int signature = getlong(woff);
         if ( signature==CHR('w','O','F','2') ) {
             // TODO: add support for WOFF2
+            // Call woff2::ConvertWOFF2ToTTF on woff and load with _SFReadTTF.
             LogError(_("WOFF2 is not supported yet."));
             return NULL;
         } else if ( signature!=CHR('w','O','F','F') ) {
@@ -416,13 +420,20 @@ int _WriteWOFFFont(FILE *woff,SplineFont *sf, enum fontformat format,
 	}
     }
 
-    format = sf->subfonts!=NULL ? ff_otfcid :
+    enum fontformat sfnt_format = sf->subfonts!=NULL ? ff_otfcid :
 		sf->layers[layer].order2 ? ff_ttf : ff_otf;
     sfnt = tmpfile();
-    ret = _WriteTTFFont(sfnt,sf,format,bsizes,bf,flags,enc,layer);
+    ret = _WriteTTFFont(sfnt,sf,sfnt_format,bsizes,bf,flags,enc,layer);
     if ( !ret ) {
 	fclose(sfnt);
 return( ret );
+    }
+
+    if ( format==ff_woff2 ) {
+	// TODO: add support for WOFF2
+        // Call ConvertTTFToWOFF2 on sfnt.
+	LogError(_("WOFF2 is not supported yet."));
+	return 1;
     }
 
     fseek(sfnt,0,SEEK_END);

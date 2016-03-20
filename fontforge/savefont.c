@@ -50,7 +50,7 @@ const char *savefont_extensions[] = { ".pfa", ".pfb", ".res", "%s.pfb", ".pfa", 
 	".cid", ".cff", ".cid.cff",
 	".t42", ".t11",
 	".ttf", ".ttf", ".suit", ".ttc", ".dfont", ".otf", ".otf.dfont", ".otf",
-	".otf.dfont", ".svg", ".ufo", ".woff", NULL };
+	".otf.dfont", ".svg", ".ufo", ".woff", ".woff2", NULL };
 const char *bitmapextensions[] = { "-*.bdf", ".ttf", ".dfont", ".ttf", ".otb", ".bmap", ".dfont", ".fon", "-*.fnt", ".pdb", "-*.pt3", ".none", NULL };
 #else
 const char *savefont_extensions[] = { ".pfa", ".pfb", ".bin", "%s.pfb", ".pfa", ".pfb", ".pt3", ".ps",
@@ -60,6 +60,7 @@ const char *savefont_extensions[] = { ".pfa", ".pfb", ".bin", "%s.pfb", ".pfa", 
 	".otf.dfont", ".svg",
 	".ufo",
 	".woff",
+	".woff2",
 NULL };
 const char *bitmapextensions[] = { "-*.bdf", ".ttf", ".dfont", ".ttf", ".otb", ".bmap.bin", ".fon", "-*.fnt", ".pdb", "-*.pt3", ".none", NULL };
 #endif
@@ -824,6 +825,7 @@ return( true );
 		flags,map,layer);
 	  break;
 	  case ff_woff:
+	  case ff_woff2:
 	    oerr = !WriteWOFFFont(newname,sf,oldformatstate,sizes,bmap,
 		flags,map,layer);
 	  break;

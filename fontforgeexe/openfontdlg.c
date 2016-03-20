@@ -57,6 +57,7 @@ struct openfilefilters def_font_filters[] = {
 	   "gai,"
 #ifndef _NO_LIBPNG
 	   "woff,"
+           "woff2,"
 #endif
 	   "svg,"
 	   "ufo,"
@@ -97,6 +98,7 @@ struct openfilefilters def_font_filters[] = {
 	   "gai,"
 #ifndef _NO_LIBPNG
 	   "woff,"
+           "woff2,"
 #endif
 	   "svg,"
 	   "ufo,"
@@ -135,7 +137,7 @@ struct openfilefilters def_font_filters[] = {
 #ifdef _NO_LIBPNG
     { N_("OpenType"), "*.{ttf,otf}{.gz,.Z,.bz,.bz2,.lzma,}" },
 #else
-    { N_("OpenType"), "*.{ttf,otf,woff}{.gz,.Z,.bz,.bz2,.lzma,}" },
+    { N_("OpenType"), "*.{ttf,otf,woff,woff2}{.gz,.Z,.bz,.bz2,.lzma,}" },
 #endif
     { N_("Type1"), "*.{pfa,pfb,gsf,cid}{.gz,.Z,.bz2,.lzma,}" },
     { N_("Type2"), "*.{otf,cef,cff,gai}{.gz,.Z,.bz2,.lzma,}" },

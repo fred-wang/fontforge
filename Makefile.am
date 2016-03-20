@@ -36,7 +36,8 @@ GITIGNOREFILES = \
 	gnulib/ \
 	lib/ \
 	libltdl/ \
-	uthash/
+	uthash/ \
+	woff2
 
 
 #--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ GITIGNOREFILES = \
 AM_CPPFLAGS =
 AM_LDFLAGS =
 
-BUILT_SOURCES = uthash/src
+BUILT_SOURCES = uthash/src woff2
 EXTRA_DIST =
 CLEANFILES =
 MOSTLYCLEANFILES =
@@ -135,6 +136,12 @@ uthash/src:
 	if [ -e uthash ] ; then rm -r uthash ; fi ; \
 	git clone https://github.com/troydhanson/uthash ; \
 	fi ;
+
+woff2:
+	if [ ! -e woff2 ] ; then \
+	git clone --recursive https://github.com/google/woff2 ; \
+	fi ;
+	$(MAKE) -C woff2
 
 # We import a selection of targets from Frank's standard packaging Makefile.
 
